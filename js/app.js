@@ -4,18 +4,22 @@ let sorteado = false;
 
 function adicionar() {
     let nome = document.getElementById('nome-amigo').value;
-    if (nome) {
-        listaDeAmigos.push(' ' + nome);
-        campoListaDeAmigos.innerHTML = listaDeAmigos;
-        document.getElementById('nome-amigo').value = '';
+    if (listaDeAmigos.includes(' ' + nome)) {
+        alert('o nome já está incluído');
     } else {
-        alert('preencha o nome')
+        if (nome) {
+            listaDeAmigos.push(' ' + nome);
+            campoListaDeAmigos.innerHTML = listaDeAmigos;
+            document.getElementById('nome-amigo').value = '';
+        } else {
+            alert('preencha o nome')
+        }   
     }
 }
 
 function sortear() {
     if (sorteado == false) {
-        if (campoListaDeAmigos.innerHTML){
+        if (campoListaDeAmigos.innerHTML && listaDeAmigos.length >= 4){
             if(listaDeAmigos.length % 2 == 0){
                 sorteado = true;
 
@@ -42,7 +46,7 @@ function sortear() {
                 alert('adicione mais um amigo, para não sobrar');
             }
         } else{
-            alert('adicione amigos')
+            alert('adicione mais amigos')
         }
     } else {
         alert('you wish draw again?');
