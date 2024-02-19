@@ -4,16 +4,36 @@ let sorteado = false;
 
 function adicionar() {
     let nome = document.getElementById('nome-amigo').value;
-    if (listaDeAmigos.includes(' ' + nome)) {
+    if (listaDeAmigos.includes(nome)) {
         alert('o nome já está incluído');
     } else {
         if (nome) {
-            listaDeAmigos.push(' ' + nome);
-            campoListaDeAmigos.innerHTML = listaDeAmigos;
+            listaDeAmigos.push(nome);
+            campoListaDeAmigos.innerHTML += '<span onclick="excluir(\'' + nome + '\')" >' + nome + '</span> ';
             document.getElementById('nome-amigo').value = '';
         } else {
             alert('preencha o nome')
         }   
+    }
+    console.log(listaDeAmigos);
+    console.log(document.getElementById('lista-amigos'))
+}
+
+function excluir(nome) {
+    let index = listaDeAmigos.indexOf(nome);
+    if (index !== -1) {
+        listaDeAmigos.splice(index, 1);
+        atualizarListaAmigos();
+        alert('Amigo excluído com sucesso.');
+    }
+    console.log(listaDeAmigos);
+    console.log(document.getElementById('lista-amigos'))
+}
+
+function atualizarListaAmigos() {
+    campoListaDeAmigos.innerHTML = ''; // Limpa o conteúdo atual
+    for (let i = 0; i < listaDeAmigos.length; i++) {
+        campoListaDeAmigos.innerHTML += '<span onclick="excluir(\'' + listaDeAmigos[i] + '\')" >' + listaDeAmigos[i] + '</span> ';
     }
 }
 
